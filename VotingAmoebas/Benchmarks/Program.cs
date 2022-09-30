@@ -7,7 +7,6 @@ namespace Benchmarks
     public class ActivationFunctionBenchmarks
     {
         private Random _rnd;
-        private double _rndValue;
 
         [GlobalSetup]
         public void Setup()
@@ -15,29 +14,26 @@ namespace Benchmarks
             _rnd = new Random();
         }
 
-        [IterationSetup]
-        public void IterationSetup()
-        {
-            _rndValue= (_rnd.NextDouble() - 1.0) * 5.0;
-        }
-
 
         [Benchmark]
         public void ReluBenchmark()
         {
-            VotingData.Program.Relu(_rndValue);
+            var input = (_rnd.NextDouble() - 1.0) * 5.0;
+            VotingData.Program.Relu(input);
         }
 
         [Benchmark]
         public void SigmoidBenchmark()
         {
-            VotingData.Program.Sigmoid(_rndValue);
+            var input = (_rnd.NextDouble() - 1.0) * 5.0;
+            VotingData.Program.Sigmoid(input);
         }
 
         [Benchmark]
         public void JustRandom()
         {
-            VotingData.Program.NoActivation(_rndValue);
+            var input = (_rnd.NextDouble() - 1.0) * 5.0;
+            VotingData.Program.NoActivation(input);
         }
      }
 
