@@ -4,6 +4,23 @@ using BenchmarkDotNet.Running;
 
 namespace Benchmarks
 {
+    public class AlgorithmBenchmarks 
+    {
+
+        [Benchmark]
+        public int ReluBenchmark()
+        {
+            return VotingData.Program.Main(new[] {""});
+        }
+
+        //[Benchmark]
+        //public void SigmoidBenchmark()
+        //{
+        //    VotingData.Program.Sigmoid(input);
+        //}
+
+     }
+
     public class ActivationFunctionBenchmarks
     {
         private Random _rnd;
@@ -41,7 +58,7 @@ namespace Benchmarks
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<ActivationFunctionBenchmarks>();
+            var summary = BenchmarkRunner.Run<AlgorithmBenchmarks>();
             Console.Write(summary);
         }
     }

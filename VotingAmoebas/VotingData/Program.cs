@@ -1,13 +1,14 @@
 ﻿using Amoeba.Common.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace VotingData
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static int  Main(string[] args)
         {
             const int MAX_EXECUTIONS = 250;
 
@@ -24,6 +25,8 @@ namespace VotingData
 
             (var trainingSet, var testSet) = allVoters.Split(0.75);
 
+  //          var sw = new Stopwatch();
+//            sw.Start();
             while (count < MAX_EXECUTIONS)
             {
                 // Train and test
@@ -39,6 +42,9 @@ namespace VotingData
                 count++;
                 resultPercentages.Add(accuracy);
             }
+ //           sw.Stop();
+
+//            Console.WriteLine($"Training data execution time: {sw.ElapsedMilliseconds} ms");
 
             var sum = resultPercentages.Sum(r => r);
             var avg = sum / Convert.ToDouble(count);
@@ -47,11 +53,13 @@ namespace VotingData
             var min = resultPercentages.Min(r => r);
 
             // Training Results
-            Console.WriteLine($"Training - Mean: {avg}  Min: {min}  Max {max}  StDev: {dev}");
+ //           Console.WriteLine($"Training - Mean: {avg}  Min: {min}  Max {max}  StDev: {dev}");
 
             // Run all voters through the best model and show the failures
             var (bestModelPasses, bestModelFailures) = bestModel.Test(allVoters);
-            Console.WriteLine($"Incorrect Predictions:\r\n{bestModelFailures.AsResultsList()}");
+            return bestModelFailures.Count();
+
+//            Console.WriteLine($"Incorrect Predictions:\r\n{bestModelFailures.AsResultsList()}");
         }
 
         private static (double accuracy, Model model) TrainAndTestModel(IEnumerable<Voter> trainingSet, IEnumerable<Voter> testSet)
