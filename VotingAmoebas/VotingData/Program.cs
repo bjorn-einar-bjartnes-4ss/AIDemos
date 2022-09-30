@@ -77,7 +77,7 @@ namespace VotingData
             return voters.Sum(v => Math.Pow(model.CalculateError(v), 2));
         }
 
-        private static double NoActivation(double value) => value;
+        public static double NoActivation(double value) => value;
 
         public static Double Relu(Double value) => Math.Max(0.0, value);
 

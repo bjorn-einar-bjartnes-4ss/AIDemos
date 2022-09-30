@@ -28,7 +28,14 @@ namespace Benchmarks
             var input = (_rnd.NextDouble() - 1.0) * 5.0;
             VotingData.Program.Sigmoid(input);
         }
-    }
+
+        [Benchmark]
+        public void JustRandom()
+        {
+            var input = (_rnd.NextDouble() - 1.0) * 5.0;
+            VotingData.Program.NoActivation(input);
+        }
+     }
 
     internal class Program
     {
