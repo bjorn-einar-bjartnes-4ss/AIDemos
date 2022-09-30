@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VotingData
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -79,7 +79,7 @@ namespace VotingData
 
         private static double NoActivation(double value) => value;
 
-        private static Double Relu(Double value) => Math.Max(0.0, value);
+        public static Double Relu(Double value) => Math.Max(0.0, value);
 
         public static Double Sigmoid(Double value)
         {
